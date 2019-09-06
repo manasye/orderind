@@ -12,7 +12,7 @@
         explicabo fugit ipsum, magnam sequi tempora totam. Atque culpa delectus
         eos impedit incidunt necessitatibus non quae ratione rem, suscipit ut?
       </p>
-      <div style="text-align: right" class="mb-10">
+      <div style="text-align: right" class="mb-5">
         <h4>Beli sebanyak</h4>
         <v-text-field
           v-model="counter"
@@ -21,13 +21,16 @@
           @click:append-outer="increment"
           prepend-icon="mdi-minus"
           @click:prepend="decrement"
-          style="width: 25%; float: right;"
+          style="width: 25%; float: right; "
         ></v-text-field>
       </div>
-      <v-row style="margin-top: 10vh">
+      <div>
+        <v-icon large>mdi-calendar</v-icon>
+      </div>
+      <v-row class="mt-5 mb-10">
         <v-col col="6"
           ><p class="harga">Harga</p>
-          <h3>Rp 280.000</h3></v-col
+          <h3>Rp {{counter * 280000}}</h3></v-col
         >
         <v-col col="6">
           <v-btn

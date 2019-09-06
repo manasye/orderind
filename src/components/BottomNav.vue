@@ -5,6 +5,11 @@
       <v-icon>mdi-home</v-icon>
     </v-btn>
 
+    <v-btn @click="goTo('/chat')">
+      <span>Chat</span>
+      <v-icon>mdi-chat</v-icon>
+    </v-btn>
+
     <v-btn @click="goTo('/history')">
       <span>Riwayat</span>
       <v-icon>mdi-history</v-icon>

@@ -19,6 +19,12 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/Profile.vue")
     },
     {
+      path: "/chat",
+      name: "chat",
+      component: () =>
+          import(/* webpackChunkName: "about" */ "./views/Chat.vue")
+    },
+    {
       path: "/history",
       name: "history",
       component: () =>
