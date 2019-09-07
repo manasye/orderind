@@ -9,9 +9,11 @@
           />
         </v-col>
         <v-col cols="5"
-          ><h3>Pisang Molen</h3>
-          <h5 class="count">50kg</h5>
-          <h5 class="price">Rp. 280.000,-</h5></v-col
+          ><h3>{{ schedule.name }}</h3>
+          <h5 class="count">{{ schedule.quantity }}</h5>
+          <h5 class="price">
+            Rp. {{ Number(schedule.price.toFixed(1)).toLocaleString() }},-
+          </h5></v-col
         >
         <v-col cols="3">
           <v-btn small right color="primary" class="mb-3" style="float: right"
@@ -23,6 +25,12 @@
     </div>
   </v-card>
 </template>
+
+<script>
+export default {
+  props: ["schedule"]
+};
+</script>
 
 <style scoped lang="scss">
 .schedule-card {
