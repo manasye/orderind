@@ -13,12 +13,17 @@
         </v-col>
         <v-col cols="6"
           ><h3>{{ schedule.orderSchedule.item.name }}</h3>
-          <h5 class="count">{{ schedule.orderSchedule.item.quantity }}</h5>
+          <h5 class="count">
+            Jumlah: {{ schedule.orderSchedule.item.quantity }}
+          </h5>
           <h5 class="price">
-            Rp.
+            Total harga : Rp.
             {{
               Number(
-                schedule.orderSchedule.item.price.toFixed(1)
+                (
+                  schedule.orderSchedule.item.quantity *
+                  schedule.orderSchedule.item.price
+                ).toFixed(1)
               ).toLocaleString()
             }},-
           </h5></v-col
