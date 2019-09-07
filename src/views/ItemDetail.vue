@@ -46,6 +46,7 @@
           <v-btn
             style="float: right;color: white; margin-top: .5vh"
             color="light-blue accent-4"
+            to="/payment"
             >Beli</v-btn
           ></v-col
         >
@@ -56,6 +57,7 @@
 
 <script>
 import config from "../config";
+
 export default {
   created() {
     fetch(config.host + "/items/" + this.$route.params.id)
@@ -82,7 +84,7 @@ export default {
       this.counter = parseInt(this.counter, 10) + 1;
     },
     decrement() {
-      this.counter = parseInt(this.counter, 10) - 1;
+      if (this.counter > 0) this.counter = parseInt(this.counter, 10) - 1;
     }
   }
 };

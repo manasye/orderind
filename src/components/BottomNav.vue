@@ -32,7 +32,12 @@ export default {
   mounted() {
     const path = window.location.pathname;
     let active = 0;
-    if (path.includes("/") || path.includes("/search") || path.includes("item"))
+    if (
+      path.includes("/") ||
+      path.includes("/search") ||
+      path.includes("item") ||
+      path.includes("payment")
+    )
       active = 0;
     if (path.includes("/chat")) active = 1;
     if (path.includes("/history") || path.includes("/order")) active = 3;
