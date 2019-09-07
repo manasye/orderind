@@ -30,6 +30,7 @@
       </div>
       <div>
         <v-select
+          v-model="optionChoosen"
           prepend-icon="mdi-calendar"
           :items="options"
           label="Jadwal otomatis"
@@ -72,6 +73,7 @@ export default {
         "Setiap mingggu",
         "Setiap bulan"
       ],
+      optionChoosen: null,
       detail: {}
     };
   },

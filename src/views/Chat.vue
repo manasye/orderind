@@ -9,32 +9,33 @@
     <v-divider></v-divider>
     <div class="chat">
       <v-container>
-        <div class="chat-in-container">
-          <div class="chat-in">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-            excepturi expedita
-          </div>
-        </div>
-        <div class="chat-out-container">
-          <div class="chat-out">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-            aperiam delectus, dolore
-          </div>
-        </div>
-
-        <carousel :perPage="2.1">
-          <slide v-for="i in 3" :key="i">
-            <div class="chat-carousel" @click="goTo(`/item/${id}`)">
-              <img
-                src="https://hellosehat.com/wp-content/uploads/2017/04/shutterstock_733072618.jpg"
-                alt=""
-              />
-              <h3 style="text-align: center">Pisang</h3>
-              <h5 style="text-align: center; color: #009cdc">Rp. 200.000,-</h5>
+        <template v-for="chat in chats">
+          <div class="chat-in-container" :key="chat._id">
+            <div class="chat-in">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+              excepturi expedita
             </div>
-          </slide>
-        </carousel>
+          </div>
+          <div class="chat-out-container" :key="chat._id">
+            <div class="chat-out">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
+              aperiam delectus, dolore
+            </div>
+          </div>
 
+          <carousel :perPage="2.1" :key="chat._id">
+            <slide v-for="i in 3" :key="i">
+              <div class="chat-carousel" @click="goTo(`/item/${id}`)">
+                <img
+                  src="https://hellosehat.com/wp-content/uploads/2017/04/shutterstock_733072618.jpg"
+                  alt=""
+                />
+                <h3 style="text-align: center">Pisang</h3>
+                <h5 style="text-align: center; color: #009cdc">Rp. 200.000,-</h5>
+              </div>
+            </slide>
+          </carousel>
+        </template>
         <v-text-field
           label="Ketik pesan disini"
           append-outer-icon="mdi-send"
@@ -47,14 +48,25 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import config from '../config';
+import socketClient from "socket.io-client";
 
 export default {
   components: {
     Carousel,
     Slide
   },
+  created() {
+    fetch(config.host + '/messages?merchantId=5d726d23c392ad75ea1079ab')
+      .then(response => response.json())
+      .then(response => {
+        this.chats = response.data
+      });
+  },
   data() {
-    return {};
+    return {
+      chats: []
+    };
   },
   methods: {
     goTo(page) {
