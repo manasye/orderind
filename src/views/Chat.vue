@@ -10,28 +10,26 @@
     <div class="chat">
       <v-container>
         <template v-for="chat in chats">
-          <div class="chat-in-container" :key="chat._id">
+          <div v-if="chat.fromBot && chat.message.type === 'TEXT'" class="chat-in-container" :key="chat._id">
             <div class="chat-in">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-              excepturi expedita
+              {{ chat.message.data }}
             </div>
           </div>
-          <div class="chat-out-container" :key="chat._id">
+          <div v-else-if="!chat.fromBot && chat.message && chat.message.type === 'TEXT'" class="chat-out-container" :key="chat._id">
             <div class="chat-out">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-              aperiam delectus, dolore
+              {{ chat.message.data }}
             </div>
           </div>
-
-          <carousel :perPage="2.1" :key="chat._id">
-            <slide v-for="i in 3" :key="i">
-              <div class="chat-carousel" @click="goTo(`/item/${id}`)">
+          <carousel :perPage="2.1" :key="chat._id" v-else-if="chat.message && chat.message.type === 'CAROUSEL'">
+            <slide v-for="item in chat.message.data" :key="item._id">
+              <div class="chat-carousel" @click="goTo(`/item/${item._id}`)">
                 <img
-                  src="https://hellosehat.com/wp-content/uploads/2017/04/shutterstock_733072618.jpg"
+                  class="carousel-picture"
+                  :src="item.picture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'"
                   alt=""
                 />
-                <h3 style="text-align: center">Pisang</h3>
-                <h5 style="text-align: center; color: #009cdc">Rp. 200.000,-</h5>
+                <h3 style="text-align: center">{{ item.name }}</h3>
+                <h5 style="text-align: center; color: #009cdc">Rp. {{ Number(item.price.toFixed(1)).toLocaleString() }},-</h5>
               </div>
             </slide>
           </carousel>
@@ -40,6 +38,9 @@
           label="Ketik pesan disini"
           append-outer-icon="mdi-send"
           class="mb-12 message-box"
+          v-model="inputMessage"
+          @click:append-outer="sendMessage"
+          @keydown="sendMessageByEnter"
         ></v-text-field>
       </v-container>
     </div>
@@ -49,7 +50,6 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import config from '../config';
-import socketClient from "socket.io-client";
 
 export default {
   components: {
@@ -60,17 +60,40 @@ export default {
     fetch(config.host + '/messages?merchantId=5d726d23c392ad75ea1079ab')
       .then(response => response.json())
       .then(response => {
+        console.log(response);
         this.chats = response.data
       });
+    this.socketClient.on('chatbot_response', message => {
+      this.chats.push(JSON.parse(message));
+    });
   },
   data() {
     return {
-      chats: []
+      chats: [],
+      socketClient: require("socket.io-client")(config.socketHost),
+      inputMessage: ''
     };
   },
   methods: {
     goTo(page) {
       this.$router.push(page).catch(() => {});
+    },
+    sendMessage() {
+      this.socketClient.emit('chatbot_message', this.inputMessage);
+      this.chats.push({
+        merchant: '5d726d23c392ad75ea1079ab',
+        fromBot: false,
+        message: {
+          type: 'TEXT',
+          data: this.inputMessage
+        }
+      });
+      this.inputMessage = '';
+    },
+    sendMessageByEnter(event) {
+      if (event.keyCode === 13) {
+        this.sendMessage();
+      }
     }
   }
 };
@@ -99,7 +122,7 @@ export default {
 .chat-in {
   background-color: rgb(192, 192, 192, 0.15);
   padding: 12px;
-  width: 70%;
+  max-width: 70%;
   border-radius: 16px;
   margin-bottom: 16px;
 }
@@ -108,7 +131,7 @@ export default {
   color: white;
   padding: 12px;
   margin-left: auto;
-  width: 70%;
+  max-width: 70%;
   border-radius: 16px;
   margin-bottom: 16px;
 }
@@ -118,6 +141,10 @@ export default {
   margin-bottom: 16px;
   background-color: rgb(192, 192, 192, 0.15);
   padding: 12px;
+}
+.carousel-picture {
+  width: 140px;
+  height: 140px;
 }
 .message-box {
   position: fixed;
