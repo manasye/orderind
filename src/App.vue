@@ -23,8 +23,10 @@ export default {
 body {
   font-family: "Nunito", sans-serif;
 }
-
 img {
   max-width: 100%;
+}
+.price {
+  color: #0091ea;
 }
 </style>

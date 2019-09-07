@@ -35,7 +35,7 @@ export default {
     if (path.includes("/") || path.includes("/search") || path.includes("item"))
       active = 0;
     if (path.includes("/chat")) active = 1;
-    if (path.includes("/history")) active = 3;
+    if (path.includes("/history") || path.includes("/order")) active = 3;
     if (path.includes("/profile")) active = 4;
     this.activeBtn = active;
   },
