@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container">
+  <div class="card-container" @click="$emit('click')">
     <v-card>
       <div style="padding: 12px">
         <v-row>

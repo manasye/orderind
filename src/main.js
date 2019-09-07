@@ -4,9 +4,12 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 import vuetify from "./plugins/vuetify";
-
+import Toasted from 'vue-toasted';
 import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
+Vue.use(Toasted, {
+  duration: 2000
+});
 
 Vue.config.productionTip = false;
 

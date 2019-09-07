@@ -6,12 +6,14 @@
       v-for="p in methods"
       :key="p.name"
       :payment="p"
+      @click="proceedPayment"
     ></payment-card>
   </v-container>
 </template>
 
 <script>
 import PaymentCard from "../components/PaymentCard";
+import config from "../config";
 
 export default {
   components: { PaymentCard },
@@ -48,8 +50,37 @@ export default {
           name: "BCA",
           detail: "Transfer ATM, Mobile Banking"
         }
-      ]
+      ],
+      merchantId: config.merchantId,
+      quantity: this.$route.query.qty,
+      itemId: this.$route.query.itemId
     };
+  },
+  methods: {
+    proceedPayment() {
+      fetch(config.host + "/orders", {
+        method: 'post',
+        body: JSON.stringify({
+          merchantId: this.merchantId,
+          quantity: this.quantity,
+          itemId: this.itemId
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+        .then(response => response.json())
+        .then(response => {
+          console.log(response);
+          if (response.status === 200) {
+            this.$router.replace(`/order/${response.data._id}`)
+            this.$toasted.success('Order successfully created!');
+          } else {
+            this.$router.go(-1);
+            this.$toasted.error('Something went wrong :(')
+          }
+        })
+    }
   }
 };
 </script>

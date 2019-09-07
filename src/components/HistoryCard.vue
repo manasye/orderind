@@ -1,5 +1,5 @@
 <template>
-  <v-card @click="goTo(`/order/${history.id}`)">
+  <v-card @click="goTo(`/order/${history._id}`)">
     <div class="history-container">
       <v-row>
         <v-col cols="7">

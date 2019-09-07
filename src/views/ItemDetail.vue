@@ -46,7 +46,7 @@
           <v-btn
             style="float: right;color: white; margin-top: .5vh"
             color="light-blue accent-4"
-            to="/payment"
+            @click="goToPayment"
             >Beli</v-btn
           ></v-col
         >
@@ -72,7 +72,7 @@ export default {
       options: [
         "Tidak pernah",
         "Setiap menit",
-        "Setiap mingggu",
+        "Setiap minggu",
         "Setiap bulan"
       ],
       optionChoosen: null,
@@ -85,6 +85,43 @@ export default {
     },
     decrement() {
       if (this.counter > 0) this.counter = parseInt(this.counter, 10) - 1;
+    },
+    goToPayment() {
+      this.createScheduler();
+      this.$router.push({ name: "payment", query: {
+          itemId: this.detail._id, 
+          qty: this.counter
+        } 
+      });
+    },
+    createScheduler() {
+      let request = {
+        merchantId: config.merchantId,
+        itemId: this.detail._id,
+        quantity: this.counter,
+      }
+      if (this.optionChoosen === "Setiap menit") {
+        request.isEachMinute = true;
+        request.isWeekly = false;
+        request.isMonthly = false;
+      } else if (this.optionChoosen === "Setiap minggu") {
+        request.isEachMinute = false;
+        request.isWeekly = true;
+        request.isMonthly = false;
+      } else if (this.optionChoosen === "Setiap bulan") {
+        request.isEachMinute = false;
+        request.isWeekly = false;
+        request.isMonthly = true;
+      } else {
+        return;
+      }
+      fetch(config.host + "/order-schedules", {
+        method: 'post',
+        body: JSON.stringify(request),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then(res => res.json()).then(res => console.log(res));
     }
   }
 };
