@@ -29,4 +29,7 @@ img {
 .price {
   color: #0091ea;
 }
+.v-application--wrap {
+  margin-bottom: 45px;
+}
 </style>
