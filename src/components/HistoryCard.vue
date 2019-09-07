@@ -2,15 +2,31 @@
   <v-card @click="goTo(`/order/${history._id}`)">
     <div class="history-container">
       <v-row>
-        <v-col cols="7">
-          <h3>Pisang Molen</h3>
-          <h5 class="price mb-2">Rp 280.000,-</h5>
-          <v-btn color="warning" small>Diproses</v-btn>
-          <!--<v-btn color="primary" small>Selesai</v-btn>-->
+        <v-col cols="9">
+          <h3>{{ history.item.name }}</h3>
+          <h5 class="price mb-2">
+            Rp.
+            {{ Number(history.item.price.toFixed(1)).toLocaleString() }},-
+          </h5>
+          <v-btn color="" small v-if="history.status === 'PENDING'"
+            >Pending</v-btn
+          >
+          <v-btn color="secondary" small v-if="history.status === 'CONFIRMED'"
+            >Dikonfirmasi</v-btn
+          >
+          <v-btn color="warning" small v-if="history.status === 'ON_PROCESS'"
+            >Diproses</v-btn
+          >
+          <v-btn color="primary" small v-if="history.status === 'DELIVERED'"
+            >Selesai</v-btn
+          >
         </v-col>
-        <v-col cols="5">
+        <v-col cols="3">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw"
+            :src="
+              history.item.picture ||
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'
+            "
             alt=""
           />
         </v-col>

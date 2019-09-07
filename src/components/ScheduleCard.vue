@@ -30,10 +30,17 @@
             color="primary"
             class="mb-3"
             style="float: right"
-            @click="confirm(schedule._id)"
+            @click="confirm(schedule._id, true)"
             >Ok</v-btn
           >
-          <v-btn small right color="error" style="float: right">Batal</v-btn>
+          <v-btn
+            small
+            right
+            color="error"
+            style="float: right"
+            @click="confirm(schedule._id, false)"
+            >Batal</v-btn
+          >
         </v-col>
       </v-row>
     </div>
@@ -46,14 +53,16 @@ import config from "../config";
 export default {
   props: ["schedule"],
   methods: {
-    confirm(id) {
+    confirm(id, isConfirmed) {
       fetch(config.host + "/upcoming-orders/" + id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderConfirm: true })
+        body: JSON.stringify({ orderConfirm: isConfirmed })
       })
         .then(response => response.json())
-        .then(response => {
+        .then(() => {
+          if (isConfirmed) this.$toasted.success("Barang berhasil di pesan");
+          else this.$toasted.success("Barang tidak jadi dipesan");
         });
     }
   }
