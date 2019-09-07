@@ -3,10 +3,11 @@
     :class="iseven ? 'item-card-container-left' : 'item-card-container-right'"
     class="mb-4"
   >
-    <v-card @click="goTo(`/item/${item.id}`)">
+    <v-card @click="goTo(`/item/${item._id}`)">
       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw"
+        :src="item.picture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'"
         alt=""
+        class="item-card-picture"
       />
       <div class="item-card-content">
         <h4>{{ item.name }}</h4>
@@ -36,6 +37,12 @@ export default {
 }
 .item-card-content {
   padding: 6px;
+}
+.item-card-picture {
+  display: block;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
 }
 .price-tag {
   color: #0091ea;
