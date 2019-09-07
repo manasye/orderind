@@ -47,14 +47,24 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import config from '../config';
 
 export default {
   components: {
     Carousel,
     Slide
   },
+  created() {
+    fetch(config.host + '/messages?merchantId=5d726d23c392ad75ea1079ab')
+      .then(response => response.json())
+      .then(response => {
+        this.chats = response.data
+      });
+  },
   data() {
-    return {};
+    return {
+      chats: []
+    };
   }
 };
 </script>
