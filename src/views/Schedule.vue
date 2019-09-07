@@ -2,9 +2,10 @@
   <v-container>
     <h3 class="mb-5">Jadwal Otomasi Pesanan</h3>
     <schedule-card
-      v-for="s in schedules"
+      v-for="(s, idx) in schedules"
       :schedule="s"
       :key="s.id"
+      @click="schedules.splice(idx, 1)"
     ></schedule-card>
     <img
       v-if="schedules.length === 0"
