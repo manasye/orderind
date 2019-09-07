@@ -54,7 +54,12 @@ export default {
   data() {
     return {
       counter: 1,
-      options: ["Setiap menit", "Setiap mingggu", "Setiap bulan"]
+      options: [
+        "Tidak pernah",
+        "Setiap menit",
+        "Setiap mingggu",
+        "Setiap bulan"
+      ]
     };
   },
   methods: {

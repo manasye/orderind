@@ -21,7 +21,20 @@
             aperiam delectus, dolore
           </div>
         </div>
-        <div class="chat-carousel"></div>
+
+        <carousel :perPage="2.1">
+          <slide v-for="i in 3" :key="i">
+            <div class="chat-carousel">
+              <img
+                src="https://hellosehat.com/wp-content/uploads/2017/04/shutterstock_733072618.jpg"
+                alt=""
+              />
+              <h3 style="text-align: center">Pisang</h3>
+              <h5 style="text-align: center; color: #009cdc">Rp. 200.000,-</h5>
+            </div>
+          </slide>
+        </carousel>
+
         <v-text-field
           label="Ketik pesan disini"
           append-outer-icon="mdi-send"
@@ -33,7 +46,13 @@
 </template>
 
 <script>
+import { Carousel, Slide } from "vue-carousel";
+
 export default {
+  components: {
+    Carousel,
+    Slide
+  },
   data() {
     return {};
   }
@@ -61,7 +80,7 @@ export default {
   overflow-y: scroll;
 }
 .chat-in {
-  background-color: #cdcdcd;
+  background-color: rgb(192, 192, 192, 0.15);
   padding: 12px;
   width: 70%;
   border-radius: 16px;
@@ -76,10 +95,23 @@ export default {
   border-radius: 16px;
   margin-bottom: 16px;
 }
+.chat-carousel {
+  width: 90%;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  background-color: rgb(192, 192, 192, 0.15);
+  padding: 12px;
+}
 .message-box {
   position: fixed;
   bottom: 0px;
   width: calc(100vw - 24px);
   background-color: white;
+}
+</style>
+
+<style>
+.VueCarousel-dot-container {
+  margin-top: 0 !important;
 }
 </style>

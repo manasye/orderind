@@ -10,6 +10,11 @@
       <v-icon>mdi-chat</v-icon>
     </v-btn>
 
+    <v-btn @click="goTo('/schedule')">
+      <span>Jadwal</span>
+      <v-icon>mdi-timetable</v-icon>
+    </v-btn>
+
     <v-btn @click="goTo('/history')">
       <span>Riwayat</span>
       <v-icon>mdi-history</v-icon>
@@ -30,8 +35,8 @@ export default {
     if (path.includes("/") || path.includes("/search") || path.includes("item"))
       active = 0;
     if (path.includes("/chat")) active = 1;
-    if (path.includes("/history")) active = 2;
-    if (path.includes("/profile")) active = 3;
+    if (path.includes("/history")) active = 3;
+    if (path.includes("/profile")) active = 4;
     this.activeBtn = active;
   },
   data() {
