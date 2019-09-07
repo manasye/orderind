@@ -11,11 +11,11 @@
             Total Harga : Rp.
             {{
               Number(
-                (detail.item.price * detail.item.quantity).toFixed(1)
+                (detail.item.price * detail.quantity).toFixed(1)
               ).toLocaleString()
             }},-
           </h5>
-          <h5 class="order-grey mb-2">Jumlah: {{ detail.item.quantity }}</h5>
+          <h5 class="order-grey mb-2">Jumlah: {{ detail.quantity }}</h5>
         </v-col>
         <v-col cols="3">
           <img
