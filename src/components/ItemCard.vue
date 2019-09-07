@@ -14,7 +14,11 @@
       />
       <div class="item-card-content">
         <h4>{{ item.name }}</h4>
-        <h5 class="price-tag">{{ item.price }}</h5>
+        <h5 class="price-tag">
+          Rp.
+          {{ Number(item.price.toFixed(1)).toLocaleString() }}
+          ,-
+        </h5>
       </div></v-card
     >
   </div>

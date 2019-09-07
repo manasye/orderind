@@ -56,7 +56,7 @@
                 detail.status === 'DELIVERED'
             "
           >
-            {{ readableDate(detail.created_at) }}
+            {{ readableDate(detail.confirmed_at) }}
           </h5></v-timeline-item
         >
         <v-timeline-item
