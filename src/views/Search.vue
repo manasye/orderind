@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     fetchData() {
-      fetch(config.host + '/items?page=0&limit=100&search=' + this.searchQuery)
+      fetch(config.host + "/items?page=0&limit=100&search=" + this.searchQuery)
         .then(response => response.json())
         .then(response => {
           this.items = response.data;
@@ -39,7 +39,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.query': function(query) {
+    "$route.params.query": function(query) {
       this.searchQuery = query;
       this.fetchData();
     }

@@ -1,5 +1,5 @@
 <template>
-<v-text-field
+  <v-text-field
     v-model="searchQuery"
     outlined
     light

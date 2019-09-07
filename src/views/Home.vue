@@ -32,11 +32,11 @@ export default {
     };
   },
   created() {
-    fetch(config.host + '/items?page=0&limit=4')
+    fetch(config.host + "/items?page=0&limit=4")
       .then(response => response.json())
       .then(data => {
         this.items = data.data;
-      })
+      });
   }
 };
 </script>

@@ -5,7 +5,10 @@
   >
     <v-card @click="goTo(`/item/${item._id}`)">
       <img
-        :src="item.picture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'"
+        :src="
+          item.picture ||
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'
+        "
         alt=""
         class="item-card-picture"
       />

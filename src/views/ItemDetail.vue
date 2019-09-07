@@ -1,13 +1,18 @@
 <template>
   <div>
     <img
-      :src="detail.picture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'"
+      :src="
+        detail.picture ||
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'
+      "
       alt=""
       class="detail-picture"
     />
     <v-container>
       <h2>{{ detail.name }}</h2>
-      <h3 class="supplier mb-4">Oleh supplier {{ detail.supplier ? detail.supplier.name : '' }}</h3>
+      <h3 class="supplier mb-4">
+        Oleh supplier {{ detail.supplier ? detail.supplier.name : "" }}
+      </h3>
       <p class="mb-10">
         {{ detail.description }}
       </p>
@@ -49,10 +54,10 @@
 </template>
 
 <script>
-import config from '../config';
+import config from "../config";
 export default {
   created() {
-    fetch(config.host + '/items/' + this.$route.params.id)
+    fetch(config.host + "/items/" + this.$route.params.id)
       .then(response => response.json())
       .then(response => {
         this.detail = response.data;
@@ -94,6 +99,5 @@ export default {
   margin: 0 auto;
   height: 231px;
   width: auto;
-
 }
 </style>
