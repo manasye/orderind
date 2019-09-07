@@ -77,7 +77,7 @@ export default {
     Slide
   },
   created() {
-    fetch(config.host + "/messages?merchantId=5d726d23c392ad75ea1079ab")
+    fetch(config.host + '/messages?merchantId=' + config.merchantId)
       .then(response => response.json())
       .then(response => {
         this.chats = response.data;
