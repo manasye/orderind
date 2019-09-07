@@ -15,8 +15,8 @@
       </h4>
     </div>
     <div class="detail" v-for="d in details" :key="d.field">
-      <h3 class="field">{{ d.field }}</h3>
-      <h3>{{ d.value }}</h3>
+      <h4 class="field">{{ d.field }}</h4>
+      <h4>{{ d.value }}</h4>
     </div>
   </v-container>
 </template>

@@ -53,6 +53,12 @@ export default new Router({
       name: "order",
       component: () =>
         import(/* webpackChunkName: "order" */ "./views/OrderDetail.vue")
+    },
+    {
+      path: "/payment",
+      name: "payment",
+      component: () =>
+        import(/* webpackChunkName: "order" */ "./views/Payment.vue")
     }
   ]
 });
