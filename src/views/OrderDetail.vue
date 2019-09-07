@@ -13,9 +13,8 @@
               Number(
                 (detail.item.price * detail.quantity).toFixed(1)
               ).toLocaleString()
-            }},-
+            }},- ({{ detail.quantity }})
           </h5>
-          <h5 class="order-grey mb-2">Jumlah: {{ detail.quantity }}</h5>
         </v-col>
         <v-col cols="3">
           <img
