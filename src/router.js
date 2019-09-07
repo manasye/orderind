@@ -22,7 +22,7 @@ export default new Router({
       path: "/chat",
       name: "chat",
       component: () =>
-          import(/* webpackChunkName: "about" */ "./views/Chat.vue")
+        import(/* webpackChunkName: "about" */ "./views/Chat.vue")
     },
     {
       path: "/history",

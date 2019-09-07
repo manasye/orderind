@@ -25,12 +25,17 @@
         ></v-text-field>
       </div>
       <div>
-        <v-icon large>mdi-calendar</v-icon>
+        <v-select
+          prepend-icon="mdi-calendar"
+          :items="options"
+          label="Jadwal otomatis"
+          style="width: 50%; margin-top: -2vh"
+        ></v-select>
       </div>
       <v-row class="mt-5 mb-10">
         <v-col col="6"
           ><p class="harga">Harga</p>
-          <h3>Rp {{counter * 280000}}</h3></v-col
+          <h3>Rp {{ counter * 280000 }}</h3></v-col
         >
         <v-col col="6">
           <v-btn
@@ -48,7 +53,8 @@
 export default {
   data() {
     return {
-      counter: 1
+      counter: 1,
+      options: ["Setiap menit", "Setiap mingggu", "Setiap bulan"]
     };
   },
   methods: {

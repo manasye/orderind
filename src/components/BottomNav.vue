@@ -29,8 +29,9 @@ export default {
     let active = 0;
     if (path.includes("/") || path.includes("/search") || path.includes("item"))
       active = 0;
-    if (path.includes("/history")) active = 1;
-    if (path.includes("/profile")) active = 2;
+    if (path.includes("/chat")) active = 1;
+    if (path.includes("/history")) active = 2;
+    if (path.includes("/profile")) active = 3;
     this.activeBtn = active;
   },
   data() {
