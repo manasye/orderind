@@ -40,7 +40,7 @@ export default {
 }
 .item-card-picture {
   display: block;
-  width: 120px;
+  width: 180px;
   height: 180px;
   margin: 0 auto;
 }
