@@ -40,6 +40,7 @@ export default {
     )
       active = 0;
     if (path.includes("/chat")) active = 1;
+    if (path.includes("/schedule")) active = 2;
     if (path.includes("/history") || path.includes("/order")) active = 3;
     if (path.includes("/profile")) active = 4;
     this.activeBtn = active;

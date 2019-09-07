@@ -2,21 +2,35 @@
   <v-card>
     <div class="schedule-card">
       <v-row>
-        <v-col cols="4">
+        <v-col cols="3">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw"
+            :src="
+              schedule.orderSchedule.item.picture ||
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'
+            "
             alt=""
           />
         </v-col>
-        <v-col cols="5"
-          ><h3>{{ schedule.name }}</h3>
-          <h5 class="count">{{ schedule.quantity }}</h5>
+        <v-col cols="6"
+          ><h3>{{ schedule.orderSchedule.item.name }}</h3>
+          <h5 class="count">{{ schedule.orderSchedule.item.quantity }}</h5>
           <h5 class="price">
-            Rp. {{ Number(schedule.price.toFixed(1)).toLocaleString() }},-
+            Rp.
+            {{
+              Number(
+                schedule.orderSchedule.item.price.toFixed(1)
+              ).toLocaleString()
+            }},-
           </h5></v-col
         >
         <v-col cols="3">
-          <v-btn small right color="primary" class="mb-3" style="float: right"
+          <v-btn
+            small
+            right
+            color="primary"
+            class="mb-3"
+            style="float: right"
+            @click="confirm(schedule._id)"
             >Ok</v-btn
           >
           <v-btn small right color="error" style="float: right">Batal</v-btn>
@@ -27,8 +41,22 @@
 </template>
 
 <script>
+import config from "../config";
+
 export default {
-  props: ["schedule"]
+  props: ["schedule"],
+  methods: {
+    confirm(id) {
+      fetch(config.host + "/upcoming-orders/" + id, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderConfirm: true })
+      })
+        .then(response => response.json())
+        .then(response => {
+        });
+    }
+  }
 };
 </script>
 

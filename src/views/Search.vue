@@ -6,6 +6,10 @@
       <v-col cols="6" v-for="(item, idx) in items" :key="item.id">
         <item-card :item="item" :iseven="idx % 2 === 0"></item-card></v-col
     ></v-row>
+    <img
+      v-if="items.length === 0"
+      src="https://cdn.dribbble.com/users/1554526/screenshots/3399669/no_results_found.png"
+    />
   </v-container>
 </template>
 
