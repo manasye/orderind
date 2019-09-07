@@ -1,5 +1,24 @@
 <template>
-  <div>
-    <h1>History</h1>
-  </div>
+  <v-container>
+    <history-card
+      v-for="h in histories"
+      :history="h"
+      :key="h.id"
+    ></history-card>
+  </v-container>
 </template>
+
+<script>
+import HistoryCard from "../components/HistoryCard";
+
+export default {
+  components: {
+    HistoryCard
+  },
+  data() {
+    return {
+      histories: ["", ""]
+    };
+  }
+};
+</script>
