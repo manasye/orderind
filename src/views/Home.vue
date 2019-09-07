@@ -12,6 +12,7 @@
 <script>
 import ItemCard from "../components/ItemCard";
 import SearchBox from "../components/SearchBox";
+import config from "../config.js";
 
 export default {
   components: {
@@ -29,6 +30,13 @@ export default {
       ],
       searchQuery: ""
     };
+  },
+  created() {
+    fetch(config.host + '/items?page=0&limit=4')
+      .then(response => response.json())
+      .then(data => {
+        this.items = data.data;
+      })
   }
 };
 </script>
