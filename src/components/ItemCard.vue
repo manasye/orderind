@@ -3,7 +3,7 @@
     :class="iseven ? 'item-card-container-left' : 'item-card-container-right'"
     class="mb-4"
   >
-    <v-card @click="goTo(`/item/${item.id}`)">
+    <v-card @click="goTo(`/item/${item._id}`)">
       <img
         :src="item.picture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'"
         alt=""

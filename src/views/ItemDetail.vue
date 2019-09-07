@@ -1,16 +1,15 @@
 <template>
   <div>
     <img
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw"
+      :src="detail.picture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'"
       alt=""
+      class="detail-picture"
     />
     <v-container>
-      <h2>Judul</h2>
-      <h3 class="supplier mb-4">Oleh supplier X</h3>
+      <h2>{{ detail.name }}</h2>
+      <h3 class="supplier mb-4">Oleh supplier {{ detail.supplier ? detail.supplier.name : '' }}</h3>
       <p class="mb-10">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eum
-        explicabo fugit ipsum, magnam sequi tempora totam. Atque culpa delectus
-        eos impedit incidunt necessitatibus non quae ratione rem, suscipit ut?
+        {{ detail.description }}
       </p>
       <div style="text-align: right" class="mb-5">
         <h4>Beli sebanyak</h4>
@@ -35,7 +34,7 @@
       <v-row class="mt-5 mb-10">
         <v-col col="6"
           ><p class="harga">Harga</p>
-          <h3>Rp {{ counter * 280000 }}</h3></v-col
+          <h3>Rp {{ counter * detail.price }}</h3></v-col
         >
         <v-col col="6">
           <v-btn
@@ -50,7 +49,15 @@
 </template>
 
 <script>
+import config from '../config';
 export default {
+  created() {
+    fetch(config.host + '/items/' + this.$route.params.id)
+      .then(response => response.json())
+      .then(response => {
+        this.detail = response.data;
+      });
+  },
   data() {
     return {
       counter: 1,
@@ -59,7 +66,8 @@ export default {
         "Setiap menit",
         "Setiap mingggu",
         "Setiap bulan"
-      ]
+      ],
+      detail: {}
     };
   },
   methods: {
@@ -80,5 +88,12 @@ export default {
 .harga {
   color: rgba(0, 0, 0, 0.7);
   margin-bottom: 0;
+}
+.detail-picture {
+  display: block;
+  margin: 0 auto;
+  height: 231px;
+  width: auto;
+
 }
 </style>
