@@ -69,6 +69,7 @@ export default {
           if (isConfirmed) this.$toasted.success("Barang berhasil di pesan");
           else this.$toasted.success("Barang tidak jadi dipesan");
         });
+      this.$emit('click');
     }
   }
 };
