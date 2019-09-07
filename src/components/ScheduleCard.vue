@@ -33,9 +33,3 @@
   color: rgba(0, 0, 0, 0.5);
 }
 </style>
-
-<style>
-.price {
-  color: #0091ea;
-}
-</style>

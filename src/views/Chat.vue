@@ -24,7 +24,7 @@
 
         <carousel :perPage="2.1">
           <slide v-for="i in 3" :key="i">
-            <div class="chat-carousel">
+            <div class="chat-carousel" @click="goTo(`/item/${id}`)">
               <img
                 src="https://hellosehat.com/wp-content/uploads/2017/04/shutterstock_733072618.jpg"
                 alt=""
@@ -65,6 +65,11 @@ export default {
     return {
       chats: []
     };
+  },
+  methods: {
+    goTo(page) {
+      this.$router.push(page).catch(() => {});
+    }
   }
 };
 </script>
