@@ -96,7 +96,9 @@ export default {
   data() {
     return {
       chats: [],
-      socketClient: require("socket.io-client")(config.socketHost),
+      socketClient: require("socket.io-client")(config.socketHost, {
+        transports: ['websocket']
+      }),
       inputMessage: ""
     };
   },
