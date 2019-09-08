@@ -6,7 +6,11 @@
           <h3>{{ history.item.name }}</h3>
           <h5 class="price mb-2">
             Rp.
-            {{ Number(history.item.price.toFixed(1)).toLocaleString() }},-
+            {{
+              Number(
+                (history.quantity * history.item.price).toFixed(1)
+              ).toLocaleString()
+            }},-
           </h5>
           <v-btn color="" small v-if="history.status === 'PENDING'"
             >Pending</v-btn
@@ -27,6 +31,7 @@
               history.item.picture ||
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQWcA3uDDFQejDaIeaTNHs65eATlmvbYBMWJM6ZRdBKLqksPiEw'
             "
+            style="max-height: 73px"
             alt=""
           />
         </v-col>

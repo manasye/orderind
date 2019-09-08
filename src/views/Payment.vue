@@ -59,27 +59,27 @@ export default {
   methods: {
     proceedPayment() {
       fetch(config.host + "/orders", {
-        method: 'post',
+        method: "post",
         body: JSON.stringify({
           merchantId: this.merchantId,
           quantity: this.quantity,
           itemId: this.itemId
         }),
         headers: {
-          'Content-Type': 'application/json'
-        },
+          "Content-Type": "application/json"
+        }
       })
         .then(response => response.json())
         .then(response => {
           console.log(response);
           if (response.status === 200) {
-            this.$router.replace(`/order/${response.data._id}`)
-            this.$toasted.success('Order successfully created!');
+            this.$router.replace(`/order/${response.data._id}`);
+            this.$toasted.success("Order successfully created!");
           } else {
             this.$router.go(-1);
-            this.$toasted.error('Something went wrong :(')
+            this.$toasted.error("Something went wrong :(");
           }
-        })
+        });
     }
   }
 };

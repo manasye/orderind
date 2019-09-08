@@ -13,12 +13,15 @@
         </v-col>
         <v-col cols="6"
           ><h3>{{ schedule.orderSchedule.item.name }}</h3>
-          <h5 class="count">{{ schedule.orderSchedule.item.quantity }}</h5>
+          <h5 class="count">Jumlah: {{ schedule.orderSchedule.quantity }}</h5>
           <h5 class="price">
-            Rp.
+            Total harga : Rp.
             {{
               Number(
-                schedule.orderSchedule.item.price.toFixed(1)
+                (
+                  schedule.orderSchedule.quantity *
+                  schedule.orderSchedule.item.price
+                ).toFixed(1)
               ).toLocaleString()
             }},-
           </h5></v-col
@@ -64,7 +67,7 @@ export default {
           if (isConfirmed) this.$toasted.success("Barang berhasil di pesan");
           else this.$toasted.success("Barang tidak jadi dipesan");
         });
-      this.$emit('click');
+      this.$emit("click");
     }
   }
 };

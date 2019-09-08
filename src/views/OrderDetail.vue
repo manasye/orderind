@@ -8,8 +8,12 @@
             Oleh supplier {{ detail.item.supplier.name }}
           </h5>
           <h5 class="price mb-2">
-            Rp.
-            {{ Number(detail.item.price.toFixed(1)).toLocaleString() }},-
+            Total Harga : Rp.
+            {{
+              Number(
+                (detail.item.price * detail.quantity).toFixed(1)
+              ).toLocaleString()
+            }},- ({{ detail.quantity }})
           </h5>
         </v-col>
         <v-col cols="3">
@@ -25,13 +29,11 @@
     </div>
     <div class="progress">
       <v-timeline dense clipped light>
-        <v-timeline-item
-          right
-          small
-          :color="detail.status !== 'PENDING' ? 'primary' : 'grey'"
-        >
+        <v-timeline-item right small :color="'primary'">
           <h4>Pending</h4>
-          <!--<h5 class="order-grey">16-8-2019, 10.00 WIB</h5>--></v-timeline-item
+          <h5 class="order-grey">
+            {{ readableDate(detail.created_at) }}
+          </h5></v-timeline-item
         >
         <v-timeline-item
           right
@@ -44,7 +46,17 @@
               : 'grey'
           "
         >
-          <h4>Pesanan Dikonfirmasi</h4></v-timeline-item
+          <h4>Pesanan Dikonfirmasi</h4>
+          <h5
+            class="order-grey"
+            v-if="
+              detail.status === 'CONFIRMED' ||
+                detail.status === 'ON_PROGRESS' ||
+                detail.status === 'DELIVERED'
+            "
+          >
+            {{ readableDate(detail.confirmed_at) }}
+          </h5></v-timeline-item
         >
         <v-timeline-item
           right
@@ -55,14 +67,25 @@
               : 'grey'
           "
         >
-          <h4>Pesanan Diproses</h4></v-timeline-item
-        >
+          <h4>Pesanan Diproses</h4>
+          <h5
+            class="order-grey"
+            v-if="
+              detail.status === 'ON_PROGRESS' || detail.status === 'DELIVERED'
+            "
+          >
+            {{ readableDate(detail.processed_at) }}
+          </h5>
+        </v-timeline-item>
         <v-timeline-item
           right
           small
           :color="detail.status === 'DELIVERED' ? 'primary' : 'grey'"
         >
           <h4>Pesanan Tiba</h4>
+          <h5 class="order-grey" v-if="detail.status === 'DELIVERED'">
+            {{ readableDate(detail.delivered_at) }}
+          </h5>
         </v-timeline-item>
       </v-timeline>
     </div>
@@ -74,14 +97,23 @@
 
 <script>
 import config from "../config";
+import moment from "moment";
 
 export default {
   created() {
     this.getDetail();
   },
+  name: "OrderDetail",
   data() {
     return {
-      detail: null
+      detail: {
+        item: {
+          name: "",
+          supplier: { name: "" },
+          price: 100000,
+          picture: ""
+        }
+      }
     };
   },
   methods: {
@@ -103,6 +135,12 @@ export default {
         .then(response => {
           this.detail = response.data;
         });
+    },
+    moment: function() {
+      return moment();
+    },
+    readableDate(date) {
+      return moment(date).format("D MMMM YYYY, h:mm:ss");
     }
   }
 };

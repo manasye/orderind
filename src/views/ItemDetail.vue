@@ -88,18 +88,20 @@ export default {
     },
     goToPayment() {
       this.createScheduler();
-      this.$router.push({ name: "payment", query: {
-          itemId: this.detail._id, 
+      this.$router.push({
+        name: "payment",
+        query: {
+          itemId: this.detail._id,
           qty: this.counter
-        } 
+        }
       });
     },
     createScheduler() {
       let request = {
         merchantId: config.merchantId,
         itemId: this.detail._id,
-        quantity: this.counter,
-      }
+        quantity: this.counter
+      };
       if (this.optionChoosen === "Setiap menit") {
         request.isEachMinute = true;
         request.isWeekly = false;
@@ -116,12 +118,14 @@ export default {
         return;
       }
       fetch(config.host + "/order-schedules", {
-        method: 'post',
+        method: "post",
         body: JSON.stringify(request),
         headers: {
-          'Content-Type': 'application/json'
-        },
-      }).then(res => res.json()).then(res => console.log(res));
+          "Content-Type": "application/json"
+        }
+      })
+        .then(res => res.json())
+        .then(res => console.log(res));
     }
   }
 };
