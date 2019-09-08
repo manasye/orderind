@@ -40,7 +40,7 @@
           small
           :color="
             detail.status === 'CONFIRMED' ||
-            detail.status === 'ON_PROGRESS' ||
+            detail.status === 'ON_PROCESS' ||
             detail.status === 'DELIVERED'
               ? 'primary'
               : 'grey'
@@ -51,7 +51,7 @@
             class="order-grey"
             v-if="
               detail.status === 'CONFIRMED' ||
-                detail.status === 'ON_PROGRESS' ||
+                detail.status === 'ON_PROCESS' ||
                 detail.status === 'DELIVERED'
             "
           >
@@ -62,7 +62,7 @@
           right
           small
           :color="
-            detail.status === 'ON_PROGRESS' || detail.status === 'DELIVERED'
+            detail.status === 'ON_PROCESS' || detail.status === 'DELIVERED'
               ? 'primary'
               : 'grey'
           "
@@ -71,7 +71,7 @@
           <h5
             class="order-grey"
             v-if="
-              detail.status === 'ON_PROGRESS' || detail.status === 'DELIVERED'
+              detail.status === 'ON_PROCESS' || detail.status === 'DELIVERED'
             "
           >
             {{ readableDate(detail.processed_at) }}

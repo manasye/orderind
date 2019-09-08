@@ -15,7 +15,7 @@
           ><h3>{{ schedule.orderSchedule.item.name }}</h3>
           <h5 class="count">Jumlah: {{ schedule.orderSchedule.quantity }}</h5>
           <h5 class="price">
-            Total harga : Rp.
+            Total : Rp.
             {{
               Number(
                 (

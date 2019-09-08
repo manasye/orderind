@@ -5,7 +5,7 @@
         <v-col cols="9">
           <h3>{{ history.item.name }}</h3>
           <h5 class="price mb-2">
-            Rp.
+            Total : Rp.
             {{
               Number(
                 (history.quantity * history.item.price).toFixed(1)
